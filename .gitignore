@@ -1,0 +1,35 @@
+# Python
+
+**pycache**/
+*.pyc
+.venv/
+venv/
+env/
+
+# Environment & Secrets
+
+.env
+.env.*
+
+# Jupyter
+
+.ipynb_checkpoints/
+
+# VS Code
+
+.vscode/
+
+# Streamlit
+
+.streamlit/secrets.toml
+
+# Logs
+
+*.log
+
+# Vector DB / Local Data
+
+chroma_db/
+vectorstore/
+*.db
+*.sqlite
