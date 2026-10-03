@@ -3,7 +3,6 @@ from backend_with_tools import chatbot,get_threads
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
 import uuid
 
-# =========================== Utilities ===========================
 def generate_thread_id():
     return uuid.uuid4()
 
