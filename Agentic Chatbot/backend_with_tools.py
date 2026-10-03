@@ -15,32 +15,28 @@ from langgraph.prebuilt import ToolNode, tools_condition
 load_dotenv()
 os.environ["LANGCHAIN_PROJECT"] = "chatbot_using_tools"
 
-# ---------- LLM ----------
 llm = ChatGroq(model="openai/gpt-oss-120b")
 
-# ---------- Tools ----------
 search_tool = DuckDuckGoSearchRun()
 
 
 
 tools = [ search_tool]
-llm_with_tools = llm.bind_tools(tools)   # model now knows about the tools
-tool_node = ToolNode(tools)              # real ToolNode object, not the module
+tool_node = ToolNode(tools)             
 
 # ---------- State ----------
 class ChatState(TypedDict):
     messages: Annotated[list[BaseMessage], add_messages]
 
-# ---------- Nodes ----------
+
 def chat_node(state: ChatState):
-    response = llm_with_tools.invoke(state["messages"])   # llm_with_tools, not llm
+    response = llm_with_tools.invoke(state["messages"])  
     return {"messages": [response]}
 
-# ---------- Checkpointer ----------
+
 conn = sqlite3.connect(database="chatbot.db", check_same_thread=False)
 checkpointer = SqliteSaver(conn)
 
-# ---------- Graph ----------
 graph = StateGraph(ChatState)
 graph.add_node("chatnode", chat_node)
 graph.add_node("tools", tool_node)
