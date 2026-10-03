@@ -22,9 +22,10 @@ search_tool = DuckDuckGoSearchRun()
 
 
 tools = [ search_tool]
+llm_with_tools = llm.bind_tools(tools)  
 tool_node = ToolNode(tools)             
 
-# ---------- State ----------
+
 class ChatState(TypedDict):
     messages: Annotated[list[BaseMessage], add_messages]
 
