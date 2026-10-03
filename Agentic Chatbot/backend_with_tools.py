@@ -21,26 +21,9 @@ llm = ChatGroq(model="openai/gpt-oss-120b")
 # ---------- Tools ----------
 search_tool = DuckDuckGoSearchRun()
 
-@tool
-def calculator(first_num: float, second_num: float, operation: str) -> dict:
-    """Perform basic arithmetic: operation must be one of add, sub, mul, div."""
-    try:
-        if operation == "add":
-            result = first_num + second_num
-        elif operation == "sub":
-            result = first_num - second_num
-        elif operation == "mul":
-            result = first_num * second_num
-        elif operation == "div":
-            result = first_num / second_num
-        else:
-            return {"error": f"unsupported operation {operation}"}
-        return {"first_num": first_num, "second_num": second_num,
-                "operation": operation, "result": result}
-    except Exception as e:
-        return {"error": f"the error is {e}"}
 
-tools = [calculator, search_tool]
+
+tools = [ search_tool]
 llm_with_tools = llm.bind_tools(tools)   # model now knows about the tools
 tool_node = ToolNode(tools)              # real ToolNode object, not the module
 
