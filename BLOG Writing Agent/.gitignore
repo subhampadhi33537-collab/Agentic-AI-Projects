@@ -1,0 +1,7 @@
+# Environment variables and secrets
+.env
+.env.*
+env
+.env/
+venv/
+.venv/
