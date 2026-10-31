@@ -33,3 +33,9 @@ chroma_db/
 vectorstore/
 *.db
 *.sqlite
+
+
+
+
+.env
+*.env
